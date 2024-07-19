@@ -12,6 +12,10 @@ import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ErrorPage from "./pages/Error";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 // import Catalog from "./pages/Catalog";
 // import CourseDetails from "./pages/CourseDetails";
 
@@ -71,7 +75,19 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 
-        <Route path="*" element={<ErrorPage />} />
+        <Route
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route index path="/dashboard/my-profile" element={<MyProfile />} />
+          <Route
+            path="/dashboard/enrolled-courses"
+            element={<EnrolledCourses />}
+          />
+        </Route>
       </Routes>
     </div>
   );

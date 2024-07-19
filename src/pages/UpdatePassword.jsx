@@ -6,6 +6,7 @@ import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import StrongPasswordSuggestion from "../components/core/Auth/StrongPasswordSuggestion";
 import toast from "react-hot-toast";
 import { resetPassword } from "../services/operations/authAPI";
+import Spinner from "../components/common/Spinner";
 
 function UpdatePassword() {
   const location = useLocation();
@@ -49,9 +50,9 @@ function UpdatePassword() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-richblack-900">
+    <div className="w-full h-[calc(100vh-3.6rem)] flex justify-center items-center bg-richblack-900">
       {loading ? (
-        <div className="loader"></div>
+        <Spinner />
       ) : (
         <div className="flex flex-col justify-between gap-9 w-[100%] max-w-[508px] p-8 rounded-md">
           <div className="flex flex-col justify-between gap-3">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { getPasswordResetToken } from "../services/operations/authAPI";
+import Spinner from "../components/common/Spinner";
 
 function ForgotPassword() {
   const { loading } = useSelector((state) => state.auth);
@@ -16,11 +17,11 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-richblack-900">
+    <div className="w-full h-[calc(100vh-3.6rem)] flex justify-center items-center bg-richblack-900">
       {loading ? (
-        <div className="loader"></div>
+        <Spinner />
       ) : (
-        <div className="flex flex-col justify-between gap-9 w-[100%] max-w-[508px] p-8 rounded-md translate-y-[25%]">
+        <div className="flex flex-col justify-between gap-9 w-[100%] max-w-[508px] p-8 rounded-md">
           <div className="flex flex-col justify-between gap-3">
             <h2 className="font-inter font-semibold text-[30px] leading-9 text-richblack-5">
               {!emailSent ? "Reset Your Password" : "Check Email"}

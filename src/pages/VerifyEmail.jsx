@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { sendOtp, signUp } from "../services/operations/authAPI";
+import Spinner from "../components/common/Spinner";
 
 function VerifyEmail() {
   const { loading, signupData } = useSelector((state) => state.auth);
@@ -49,7 +50,7 @@ function VerifyEmail() {
   return (
     <div className="w-full h-[calc(100vh-3.6rem)] flex justify-center items-center bg-richblack-900">
       {loading ? (
-        <div className="loader"></div>
+        <Spinner />
       ) : (
         <div className="flex flex-col justify-between gap-9 w-[100%] max-w-[508px] p-8 rounded-md">
           <div className="flex flex-col justify-between gap-1">
