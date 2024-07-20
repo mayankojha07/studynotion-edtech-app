@@ -19,21 +19,21 @@ function VerifyEmail() {
     e.preventDefault();
 
     const {
-      accoutType,
+      accountType,
       firstName,
       lastName,
-      passowrd,
+      password,
       confirmPassword,
       email,
     } = signupData;
 
     dispatch(
       signUp(
-        accoutType,
+        accountType,
         firstName,
         lastName,
         email,
-        passowrd,
+        password,
         confirmPassword,
         otp,
         navigate

@@ -124,6 +124,7 @@ details > summary::-webkit-details-marker {
 } */
 /* Swiper CSS Ends */
 
+/* loader 1 */
 .loader {
   transform: rotateZ(45deg);
   perspective: 1000px;
@@ -197,14 +198,46 @@ details > summary::-webkit-details-marker {
   }
 }
 
+/* loader 2 */
+.loader2 {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(0deg, rgba(255, 61, 0, 0.2) 33%, #ff3d00 100%);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader2::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #263238;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .blackButton {
-  @apply cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5;
+  @apply cursor-pointer rounded-md bg-richblack-800 px-5 py-2 font-semibold text-richblack-5;
 }
 .lable-style {
-  @apply text-[14px] text-richblack-5;
+  @apply text-sm text-richblack-5;
 }
 .form-style {
-  @apply rounded-lg bg-richblack-700 p-3 text-[16px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
+  @apply rounded-lg bg-richblack-700 p-3 text-base leading-6 text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
 }
 .section_heading {
   @apply text-2xl font-bold text-richblack-5 lg:text-4xl;

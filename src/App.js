@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/common/Navbar";
 import OpenRoute from "./components/core/Auth/OpenRoute";
@@ -16,18 +16,24 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import MyProfile from "./components/core/Dashboard/MyProfile";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+import Settings from "./components/core/Dashboard/settings";
 // import Catalog from "./pages/Catalog";
 // import CourseDetails from "./pages/CourseDetails";
 
 function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter overflow-x-hidden">
+      {/* Navbar */}
       <Navbar />
+
+      {/* Routes for all links */}
       <Routes>
+        {/* Home page route */}
         <Route path="/" element={<Home />} />
         {/* <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} /> */}
 
+        {/* Signup route */}
         <Route
           path="signup"
           element={
@@ -36,6 +42,8 @@ function App() {
             </OpenRoute>
           }
         />
+
+        {/* Login route */}
         <Route
           path="login"
           element={
@@ -45,6 +53,7 @@ function App() {
           }
         />
 
+        {/* Forgot password route */}
         <Route
           path="forgot-password"
           element={
@@ -54,6 +63,7 @@ function App() {
           }
         />
 
+        {/* Verify email for signup route */}
         <Route
           path="verify-email"
           element={
@@ -63,6 +73,7 @@ function App() {
           }
         />
 
+        {/* Update password route */}
         <Route
           path="update-password/:id"
           element={
@@ -72,9 +83,19 @@ function App() {
           }
         />
 
+        {/* About page route */}
         <Route path="/about" element={<About />} />
+
+        {/* Contact us page route */}
         <Route path="/contact" element={<Contact />} />
 
+        {/* Navigate to my profile for this route */}
+        <Route
+          path="/dashboard"
+          element={<Navigate to={"/dashboard/my-profile"} />}
+        />
+
+        {/* Dashboard Routes */}
         <Route
           element={
             <PrivateRoute>
@@ -87,7 +108,11 @@ function App() {
             path="/dashboard/enrolled-courses"
             element={<EnrolledCourses />}
           />
+          <Route path="/dashboard/settings" element={<Settings />} />
         </Route>
+
+        {/* Error page routes for existing pages */}
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );

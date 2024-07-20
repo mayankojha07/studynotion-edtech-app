@@ -6,7 +6,14 @@ require("dotenv").config();
 exports.updateProfile = async (req, res) => {
   try {
     // get data
-    const { dateOfBirth = "", about = "", contactNumber, gender } = req.body;
+    const {
+      dateOfBirth = "",
+      about = "",
+      contactNumber,
+      gender,
+      firstName,
+      lastName,
+    } = req.body;
 
     // get user id
     const id = req.user.id;
@@ -24,20 +31,27 @@ exports.updateProfile = async (req, res) => {
     const profileId = userDetails.additionalDetails;
     const profileDetails = await Profile.findById(profileId);
 
+    // update in user --> firstName, lastName
+    userDetails.firstName = firstName;
+    userDetails.lastName = lastName;
+
     // update profile
     profileDetails.dateOfBirth = dateOfBirth;
     profileDetails.contactNumber = contactNumber;
     profileDetails.about = about;
     profileDetails.gender = gender;
 
-    // save and update profile
-    await profileDetails.save();
+    // save and update profile and user
+    await Promise.all([profileDetails.save(), userDetails.save()]);
 
+    console.log("Profile -----> ", profileDetails);
     // return response
     return res.status(200).json({
       success: true,
       message: "Profile updated successfully",
       profileDetails,
+      firstName: userDetails.firstName,
+      lastName: userDetails.lastName,
     });
   } catch (error) {
     res.status(500).json({
@@ -129,7 +143,7 @@ exports.updateDisplayPicture = async (req, res) => {
       { _id: userId },
       { image: image.secure_url },
       { new: true }
-    );
+    ).populate("additionalDetails");
 
     res.send({
       success: true,

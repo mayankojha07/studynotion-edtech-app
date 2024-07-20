@@ -80,10 +80,11 @@ exports.signUp = async (req, res) => {
       email,
       password,
       confirmPassword,
-      contactNumber,
       accountType,
       otp,
     } = req.body;
+
+    console.log("Request body ---> ", req.body);
 
     // validate the data
     if (
@@ -92,7 +93,6 @@ exports.signUp = async (req, res) => {
       !email ||
       !password ||
       !confirmPassword ||
-      !contactNumber ||
       !otp
     ) {
       return res.status(403).json({
@@ -148,7 +148,7 @@ exports.signUp = async (req, res) => {
     const profileDetails = await Profile.create({
       gender: "",
       dateOfBirth: "",
-      contactNumber,
+      contactNumber: "",
       about: "",
     });
 

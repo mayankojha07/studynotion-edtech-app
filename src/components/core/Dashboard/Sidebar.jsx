@@ -48,6 +48,7 @@ function Slidebar() {
             }}
           />
 
+          {/* Logout option -> opens confirmation modal */}
           <button
             onClick={() =>
               setConfirmationModal({
