@@ -62,24 +62,37 @@ function Navbar() {
                       <p>{link.title}</p>
                       <LiaAngleDownSolid />
 
-                      <div className="invisible absolute z-[100] left-[50%] top-[50%] translate-x-[-50%] translate-y-[1.5em] flex flex-col lg:w-[300px] text-richblack-900 bg-richblack-5 rounded-md opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 p-6">
+                      <div className="invisible absolute z-[100] left-[50%] top-[50%] translate-x-[-50%] translate-y-[1.5em] flex flex-col lg:w-[300px] text-richblack-900 bg-richblack-5 rounded-md opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 p-4">
                         <div className="absolute left-[50%] top-0 translate-x-[80%] translate-y-[-45%] w-6 h-6 rounded rotate-45 bg-richblack-5" />
 
                         {sublinksLoading ? (
                           <div className="w-full flex justify-center">
-                            <div className="loader2"></div>
+                            <div className="">Loading...</div>
                           </div>
                         ) : subLinks.length ? (
-                          subLinks.map((subLink, index) => (
-                            <Link to={subLink.link} key={index}>
-                              <div className="text-richblack-900">
-                                {subLink.title}
-                              </div>
-                            </Link>
-                          ))
+                          <>
+                            {subLinks
+                              // ?.filter(
+                              // (subLink) => subLink?.courses?.length > 0
+                              //)
+                              ?.map((subLink, index) => (
+                                <Link
+                                  to={`/catalog/${subLink.name
+                                    .split(" ")
+                                    .join("-")
+                                    .toLowerCase()}`}
+                                  key={index}
+                                  className="rounded-lg bg-transparent py-1 pl-2 hover:bg-richblack-50"
+                                >
+                                  <div className="text-richblack-900">
+                                    {subLink.name}
+                                  </div>
+                                </Link>
+                              ))}
+                          </>
                         ) : (
                           <div className="text-richblack-900">
-                            No catalog found!
+                            No courses found!
                           </div>
                         )}
                       </div>

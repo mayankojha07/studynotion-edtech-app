@@ -36,6 +36,13 @@ export const sidebarLinks = [
   },
   {
     id: 6,
+    name: "Wishlist",
+    path: "/dashboard/cart",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "VscBookmark",
+  },
+  {
+    id: 7,
     name: "Purchase History",
     path: "/dashboard/purchase-history",
     type: ACCOUNT_TYPE.STUDENT,
