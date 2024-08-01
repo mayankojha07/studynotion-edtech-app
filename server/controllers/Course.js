@@ -19,8 +19,10 @@ exports.createCourse = async (req, res) => {
       instructions,
     } = req.body;
 
+    console.log("Request body --> ", req.body);
+    console.log("Request body --> ", req.files);
     // fetch file from req.file
-    const thumbnail = req.files.thumbnailImage;
+    const thumbnail = req.files.thumbnail;
     console.log("Data fetched");
 
     // validate data
