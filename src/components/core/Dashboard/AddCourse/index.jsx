@@ -6,7 +6,7 @@ import RenderSteps from "./RenderSteps";
 function AddCourse() {
   return (
     <>
-      <div className=" w-full flex flex-col lg:flex-row items-start gap-x-8 px-8 pb-8 lg:pb-0">
+      <div className=" w-full flex flex-col lg:flex-row items-center lg:items-start gap-x-8 px-8 pb-8 lg:pb-0">
         <div className="flex-1 w-full gap-6 ">
           <div className="-ml-8 -mb-8">
             <OutletPath outletName={"Add Course"} />
@@ -17,7 +17,7 @@ function AddCourse() {
           </div>
         </div>
         {/* Course Uploading Tips Section */}
-        <div className="sticky top-6">
+        <div className="lg:sticky lg:top-6  w-full max-w-[40rem] lg:max-w-[23rem]">
           <CourseUploadTips />
         </div>
       </div>

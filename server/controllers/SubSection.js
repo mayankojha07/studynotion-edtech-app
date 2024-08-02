@@ -7,13 +7,15 @@ require("dotenv").config();
 exports.createSubSection = async (req, res) => {
   try {
     // fetch data
-    const { sectionId, title, timeDuration, description } = req.body;
+    const { sectionId, title, description } = req.body;
+    // console.log("REquest body --> ", req.body);
+    // console.log("Request files --> ", req.files);
 
     // extract file/video
-    const video = req.files.videoFile;
+    const video = req.files.video;
 
     // validate data
-    if (!sectionId || !title || !timeDuration || !description || !video) {
+    if (!sectionId || !title || !description || !video) {
       res.status(400).json({
         success: false,
         message: "Missing fields",
@@ -29,7 +31,7 @@ exports.createSubSection = async (req, res) => {
     // create sub secion
     const subSectionDetails = await SubSection.create({
       title,
-      timeDuration,
+      timeDuration: `${uploadDetails.duration}`,
       description,
       videoUrl: uploadDetails.secure_url,
     });
@@ -42,8 +44,6 @@ exports.createSubSection = async (req, res) => {
       },
       { new: true }
     ).populate("subSection");
-
-    // HW use populate
 
     // return response
     res.status(200).json({
@@ -64,42 +64,91 @@ exports.createSubSection = async (req, res) => {
 // TODO: update sub section handler
 exports.updateSubSection = async (req, res) => {
   try {
-    // fetch data
-    const { subSectionId, title, timeDuration, description } = req.body;
+    const { sectionId, subSectionId, title, description } = req.body;
+    const subSection = await SubSection.findById(subSectionId);
 
-    // validate data
-    const video = req.files.videoFile;
-
-    // delete and update video to cloudinary
-
-    // get sub section
-    const subSectionDetails = await SubSection.findById(subSectionId);
-    if (!subSectionDetails) {
-      return res.status(400).json({
+    if (!subSection) {
+      return res.status(404).json({
         success: false,
-        message: "Sub Section not found",
+        message: "SubSection not found",
       });
     }
 
-    // update subsection
-    subSectionDetails.title = title;
-    subSectionDetails.timeDuration = timeDuration;
-    subSectionDetails.description = description;
-    await subSectionDetails.save();
+    if (title !== undefined) {
+      subSection.title = title;
+    }
 
-    // return response
-    return res.status(200).json({
+    if (description !== undefined) {
+      subSection.description = description;
+    }
+    if (req.files && req.files.video !== undefined) {
+      const video = req.files.video;
+      const uploadDetails = await uploadImageToCloudinary(
+        video,
+        process.env.FOLDER_NAME
+      );
+      subSection.videoUrl = uploadDetails.secure_url;
+      subSection.timeDuration = `${uploadDetails.duration}`;
+    }
+
+    await subSection.save();
+
+    // find updated section and return it
+    const updatedSection = await Section.findById(sectionId).populate(
+      "subSection"
+    );
+
+    console.log("updated section", updatedSection);
+
+    return res.json({
       success: true,
-      message: "Sub Section updated",
-      subSectionDetails,
+      message: "Section updated successfully",
+      data: updatedSection,
     });
   } catch (error) {
-    res.status(500).json({
+    console.error(error);
+    return res.status(500).json({
       success: false,
-      message: "Error occurred while creating sub section",
-      error: error.message,
+      message: "An error occurred while updating the section",
     });
   }
+  // try {
+  //   // fetch data
+  //   const { subSectionId, title, timeDuration, description } = req.body;
+
+  //   // validate data
+  //   const video = req.files.videoFile;
+
+  //   // delete and update video to cloudinary
+
+  //   // get sub section
+  //   const subSectionDetails = await SubSection.findById(subSectionId);
+  //   if (!subSectionDetails) {
+  //     return res.status(400).json({
+  //       success: false,
+  //       message: "Sub Section not found",
+  //     });
+  //   }
+
+  //   // update subsection
+  //   subSectionDetails.title = title;
+  //   subSectionDetails.timeDuration = timeDuration;
+  //   subSectionDetails.description = description;
+  //   await subSectionDetails.save();
+
+  //   // return response
+  //   return res.status(200).json({
+  //     success: true,
+  //     message: "Sub Section updated",
+  //     subSectionDetails,
+  //   });
+  // } catch (error) {
+  //   res.status(500).json({
+  //     success: false,
+  //     message: "Error occurred while creating sub section",
+  //     error: error.message,
+  //   });
+  // }
 };
 
 // delete subsection handler
@@ -125,9 +174,15 @@ exports.deleteSubSection = async (req, res) => {
         .json({ success: false, message: "SubSection not found" });
     }
 
+    // find updated section and return it
+    const updatedSection = await Section.findById(sectionId).populate(
+      "subSection"
+    );
+
     return res.json({
       success: true,
       message: "SubSection deleted successfully",
+      data: updatedSection,
     });
   } catch (error) {
     console.error(error);
@@ -136,4 +191,35 @@ exports.deleteSubSection = async (req, res) => {
       message: "An error occurred while deleting the SubSection",
     });
   }
+  // try {
+  //   const { subSectionId, sectionId } = req.body;
+  //   await Section.findByIdAndUpdate(
+  //     { _id: sectionId },
+  //     {
+  //       $pull: {
+  //         subSection: subSectionId,
+  //       },
+  //     }
+  //   );
+  //   const subSection = await SubSection.findByIdAndDelete({
+  //     _id: subSectionId,
+  //   });
+
+  //   if (!subSection) {
+  //     return res
+  //       .status(404)
+  //       .json({ success: false, message: "SubSection not found" });
+  //   }
+
+  //   return res.json({
+  //     success: true,
+  //     message: "SubSection deleted successfully",
+  //   });
+  // } catch (error) {
+  //   console.error(error);
+  //   return res.status(500).json({
+  //     success: false,
+  //     message: "An error occurred while deleting the SubSection",
+  //   });
+  // }
 };
