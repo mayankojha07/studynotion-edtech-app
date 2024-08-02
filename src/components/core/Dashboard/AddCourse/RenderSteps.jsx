@@ -48,19 +48,26 @@ function RenderSteps() {
         ))}
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-6 mt-8">
         {/* Rendering the title of the form */}
-        {steps.map((item) => (
-          <Fragment key={item.id}>
-            {step === item.id && (
-              <div>
-                <p className="text-richblack-5 font-medium text-xl">
+        {/* <div className="relative mb-16 flex flex-row w-full select-none justify-between">
+          {steps.map((item) => (
+            <>
+              <div
+                className="flex flex-col min-w-[130px] items-center gap-y-2"
+                key={item.id}
+              >
+                <p
+                  className={`text-sm ${
+                    step >= item.id ? "text-richblack-5" : "text-richblack-500"
+                  }`}
+                >
                   {item.title}
                 </p>
               </div>
-            )}
-          </Fragment>
-        ))}
+            </>
+          ))}
+        </div> */}
 
         {/* Rendering the corrosponding form with the title */}
         {step === 1 && <CourseInformationForm />}
