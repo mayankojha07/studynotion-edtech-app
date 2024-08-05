@@ -22,7 +22,7 @@ function CourseInformationForm() {
     handleSubmit,
     getValues,
     setValue,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm();
 
   const { token } = useSelector((state) => state.auth);
@@ -45,11 +45,11 @@ function CourseInformationForm() {
 
     if (editCourse) {
       setValue("courseTitle", course.courseName);
-      setValue("courseShortDesc", course.couresDescription);
+      setValue("courseShortDesc", course.courseDescription);
       setValue("coursePrice", course.price);
       setValue("courseTags", course.tag);
       setValue("courseBenefits", course.whatYouWillLearn);
-      setValue("courseCategory", course.category);
+      setValue("courseCategory", course.category._id);
       setValue("courseRequirements", course.instructions);
       setValue("courseImage", course.thumbnail);
     }
@@ -59,6 +59,7 @@ function CourseInformationForm() {
 
   const isFormUpdated = () => {
     const currentValues = getValues();
+    console.log("INSIDE ISFORMUPDATED");
 
     if (
       currentValues.courseTitle !== course.courseName ||
@@ -70,9 +71,12 @@ function CourseInformationForm() {
       currentValues.courseRequirements.toString() !==
         course.instructions.toString() ||
       currentValues.courseImage !== course.thumbnail
-    )
+    ) {
+      console.log("RETURNING FROM ISFORMUPDATED");
       return true;
-    else return false;
+    } else {
+      return false;
+    }
   };
 
   // handle on submit
@@ -80,6 +84,7 @@ function CourseInformationForm() {
     // when editing an existing course
     if (editCourse) {
       if (isFormUpdated()) {
+        console.log("INSIDE ON SUBMINT");
         const currentValues = getValues();
         const formData = new FormData();
 
@@ -94,7 +99,7 @@ function CourseInformationForm() {
         if (currentValues.courseShortDesc !== course.couresDescription)
           formData.append("couresDescription", data.courseShortDesc);
 
-        if (currentValues.courseTags.toString() !== course.tags.toString())
+        if (currentValues.courseTags.toString() !== course.tag.toString())
           formData.append("tags", JSON.stringify(data.courseTags));
 
         if (currentValues.courseBenefits !== course.whatYouWillLearn)

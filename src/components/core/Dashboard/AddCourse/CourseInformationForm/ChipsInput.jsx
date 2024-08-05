@@ -20,7 +20,7 @@ function ChipsInput({
   useEffect(() => {
     if (editCourse) {
       console.log("COURSE >-> ", course);
-      setChips(course?.tag);
+      setChips(JSON.parse(course?.tag));
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);

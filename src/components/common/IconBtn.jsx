@@ -20,7 +20,7 @@ function IconBtn({
     >
       {children ? (
         <>
-          <span>{text}</span> {children}
+          <span className="w-fit">{text}</span> {children}
         </>
       ) : (
         text

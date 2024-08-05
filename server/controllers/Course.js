@@ -1,7 +1,12 @@
 const User = require("../models/User");
 const Category = require("../models/Category");
 const Course = require("../models/Course");
+const Section = require("../models/Section");
+const SubSection = require("../models/SubSection");
+const CourseProgress = require("../models/CourseProgress");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const { convertSecondsToDuration } = require("../utils/secToDuration");
+const { default: mongoose } = require("mongoose");
 require("dotenv").config();
 
 // Create course handler function
@@ -127,6 +132,8 @@ exports.editCourse = async (req, res) => {
   try {
     const { courseId } = req.body;
     const updates = req.body;
+
+    console.log("Request body --> ", req.body);
 
     const course = await Course.findById(courseId);
 
@@ -380,7 +387,8 @@ exports.deleteCourse = async (req, res) => {
     }
 
     // Unenroll students from the course
-    const studentsEnrolled = course.studentsEnroled;
+    const studentsEnrolled = course.studentEnrolled;
+    console.log("Student enrolled --> ", studentsEnrolled);
     for (const studentId of studentsEnrolled) {
       await User.findByIdAndUpdate(studentId, {
         $pull: { courses: courseId },

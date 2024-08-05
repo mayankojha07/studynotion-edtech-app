@@ -7,7 +7,6 @@ function RequirementField({
   register,
   errors,
   setValue,
-  getValues,
   placeholder,
 }) {
   const { course, editCourse } = useSelector((state) => state.course);
@@ -16,7 +15,8 @@ function RequirementField({
 
   useEffect(() => {
     if (editCourse) {
-      setRequirementsList(course?.instructions);
+      console.log("JSON -> ", JSON.parse(course?.instructions));
+      setRequirementsList(JSON.parse(course?.instructions));
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);
