@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Tbody, Td, Th, Thead, Tr } from "react-super-responsive-table";
-import { formatDate } from "../../../../services/formateDate";
+import { formatDate } from "../../../../utils/formateDate";
 import { COURSE_STATUS } from "../../../../utils/constants";
 import { HiClock } from "react-icons/hi";
 import { FaCheck } from "react-icons/fa";

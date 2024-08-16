@@ -1,5 +1,9 @@
 const Category = require("../models/Category");
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 // create Category handler function
 exports.createCategory = async (req, res) => {
   try {
@@ -78,7 +82,7 @@ exports.categoryPageDetails = async (req, res) => {
       });
     }
 
-    const selectedCourses = selectedCategory.courses;
+    // const selectedCourses = selectedCategory.courses;
 
     // Get courses for other categories
     const categoriesExceptedSelected = await Category.find({
@@ -87,22 +91,44 @@ exports.categoryPageDetails = async (req, res) => {
       .populate("courses")
       .exec();
 
-    let differentCourses = [];
-    for (const category of categoriesExceptedSelected) {
-      differentCourses.push(...category.courses);
-    }
+    // let differentCourses = [];
+    // for (const category of categoriesExceptedSelected) {
+    //   differentCourses.push(...category.courses);
+    // }
+
+    let differentCategory = await Category.findOne(
+      categoriesExceptedSelected[
+        getRandomInt(categoriesExceptedSelected.length)
+      ]._id
+    )
+      .populate({
+        path: "courses",
+        match: { status: "Published" },
+      })
+      .exec();
 
     // Get top-selling courses across all categories
-    const allCategories = await Category.find().populate("courses");
+    const allCategories = await Category.find()
+      .populate({
+        path: "courses",
+        match: { status: "Published" },
+        populate: {
+          path: "instructor",
+        },
+      })
+      .exec();
     const allCourses = allCategories.flatMap((category) => category.courses);
     const mostSellingCourses = allCourses
       .sort((a, b) => b.sold - a.sold)
       .slice(0, 10);
 
     res.status(200).json({
-      selectedCourses: selectedCourses,
-      differentCourses: differentCourses,
-      mostSellingCourses: mostSellingCourses,
+      success: true,
+      data: {
+        selectedCategory: selectedCategory,
+        differentCategory: differentCategory,
+        mostSellingCourses: mostSellingCourses,
+      },
     });
   } catch (error) {
     return res.status(500).json({

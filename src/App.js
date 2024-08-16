@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import MyCourse from "./components/core/Dashboard/MyCourse";
 import EditCourse from "./components/core/Dashboard/EditCourse";
-// import Catalog from "./pages/Catalog";
+import Catalog from "./pages/Catalog";
 // import CourseDetails from "./pages/CourseDetails";
 
 function App() {
@@ -38,8 +38,8 @@ function App() {
       <Routes>
         {/* Home page route */}
         <Route path="/" element={<Home />} />
-        {/* <Route path="catalog/:catalogName" element={<Catalog />} />
-        <Route path="courses/:courseId" element={<CourseDetails />} /> */}
+        <Route path="/catalog/:catalogName" element={<Catalog />} />
+        {/* <Route path="courses/:courseId" element={<CourseDetails />} /> */}
 
         {/* Signup route */}
         <Route
@@ -50,7 +50,6 @@ function App() {
             </OpenRoute>
           }
         />
-
         {/* Login route */}
         <Route
           path="login"
@@ -60,7 +59,6 @@ function App() {
             </OpenRoute>
           }
         />
-
         {/* Forgot password route */}
         <Route
           path="forgot-password"
@@ -70,7 +68,6 @@ function App() {
             </OpenRoute>
           }
         />
-
         {/* Verify email for signup route */}
         <Route
           path="verify-email"
@@ -80,7 +77,6 @@ function App() {
             </OpenRoute>
           }
         />
-
         {/* Update password route */}
         <Route
           path="update-password/:id"
@@ -90,19 +86,15 @@ function App() {
             </OpenRoute>
           }
         />
-
         {/* About page route */}
         <Route path="/about" element={<About />} />
-
         {/* Contact us page route */}
         <Route path="/contact" element={<Contact />} />
-
         {/* Navigate to my profile for this route */}
         <Route
           path="/dashboard"
           element={<Navigate to={"/dashboard/my-profile"} />}
         />
-
         {/* Dashboard Routes */}
         <Route
           element={
@@ -135,7 +127,6 @@ function App() {
             </>
           )}
         </Route>
-
         {/* Error page routes for existing pages */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>

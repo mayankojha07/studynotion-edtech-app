@@ -82,7 +82,7 @@ function Navbar() {
                                     .join("-")
                                     .toLowerCase()}`}
                                   key={index}
-                                  className="rounded-lg bg-transparent py-1 pl-2 hover:bg-richblack-50"
+                                  className="rounded-lg bg-transparent py-2 pl-2 hover:bg-richblack-50"
                                 >
                                   <div className="text-richblack-900">
                                     {subLink.name}
