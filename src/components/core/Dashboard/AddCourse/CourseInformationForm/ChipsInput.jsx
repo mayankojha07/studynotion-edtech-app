@@ -19,8 +19,11 @@ function ChipsInput({
   // registering the values in the form data
   useEffect(() => {
     if (editCourse) {
+      console.log("Course Tags -> ", course.tag);
       console.log("COURSE >-> ", course);
-      setChips(JSON.parse(course?.tag));
+      setChips(
+        typeof course?.tag !== "string" ? course?.tag : JSON.parse(course?.tag)
+      );
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);

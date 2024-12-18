@@ -250,6 +250,7 @@ exports.getCourseDetails = async (req, res) => {
         path: "courseContent",
         populate: {
           path: "subSection",
+          select: "-videoUrl",
         },
       })
       .exec();
@@ -262,10 +263,20 @@ exports.getCourseDetails = async (req, res) => {
       });
     }
 
+    let totalDurationInSeconds = 0;
+    courseDetails.courseContent.forEach((content) => {
+      content.subSection.forEach((subContent) => {
+        const timeDurationInSeconds = parseInt(subContent.timeDuration);
+        totalDurationInSeconds += timeDurationInSeconds;
+      });
+    });
+
+    const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
+
     return res.status(200).json({
       success: true,
       message: `Course details fetched successfully`,
-      data: courseDetails,
+      data: { courseDetails, totalDuration },
     });
   } catch (error) {
     console.log(error);

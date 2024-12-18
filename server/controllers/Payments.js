@@ -10,6 +10,7 @@ const CourseProgress = require("../models/CourseProgress");
 const {
   paymentSuccessEmail,
 } = require("../mail/templates/paymentSuccessEmail");
+const crypto = require("crypto");
 
 // For multiple payment
 // capture payment initiates the order
@@ -23,7 +24,7 @@ exports.capturePayment = async (req, res) => {
       .json({ success: false, message: "Please provide course id" });
   }
 
-  let totalAmount;
+  let totalAmount = 0;
   for (const course_id of courses) {
     let course;
     try {
@@ -60,8 +61,10 @@ exports.capturePayment = async (req, res) => {
   const options = {
     amount: totalAmount * 100,
     currency: "INR",
-    receipt: Math.random(Data.now()).toString(),
+    receipt: Math.random(Date.now()).toString(),
   };
+
+  console.log("OPTIONS -> ", options);
 
   try {
     const paymentResponse = await instance.orders.create(options);

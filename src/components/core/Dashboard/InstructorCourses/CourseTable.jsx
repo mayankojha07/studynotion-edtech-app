@@ -23,24 +23,24 @@ function CourseTable({ courses, setCourses }) {
   const [confirmationModal, setConfirmationModal] = useState(null);
 
   // TODO: get the time duration of the course
-  // const calculateDuration = (course) => {
-  //   if (course.courseContent.length === 0) return 0;
+  const calculateDuration = (course) => {
+    if (course.courseContent.length === 0) return 0;
 
-  //   let totalSeconds = 0;
+    let totalSeconds = 0;
 
-  //   course.courseContent.map((section) => {
-  //     section.subSection?.map((subSection) => {
-  //       let time = parseFloat(subSection.timeDuration);
-  //       if (!isNaN(time)) {
-  //         totalSeconds += time;
-  //       }
-  //     });
-  //   });
+    course.courseContent.map((section) => {
+      section.subSection?.map((subSection) => {
+        let time = parseFloat(subSection.timeDuration);
+        if (!isNaN(time)) {
+          totalSeconds += time;
+        }
+      });
+    });
 
-  //   const hours = Math.floor(totalSeconds / 3600);
-  //   const minutes = Math.floor((totalSeconds % 3600) / 60);
-  //   return `${hours}h ${minutes}min`;
-  // };
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    return `${hours}h ${minutes}min`;
+  };
 
   const handleCourseDelete = async (courseId) => {
     setLoading(true);

@@ -15,8 +15,12 @@ function RequirementField({
 
   useEffect(() => {
     if (editCourse) {
-      console.log("JSON -> ", JSON.parse(course?.instructions));
-      setRequirementsList(JSON.parse(course?.instructions));
+      console.log("JSON -> ", course?.instructions);
+      setRequirementsList(
+        typeof course?.instructions !== "string"
+          ? course?.instructions
+          : JSON.parse(course?.instructions)
+      );
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);

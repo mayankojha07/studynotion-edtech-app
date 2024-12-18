@@ -21,7 +21,7 @@ export const getCatalogPageData = async (categoryId) => {
   } catch (error) {
     console.log("CATALOG PAGE DATA API ERROR -> ", error);
     result = error.response?.data;
-    toast.error("Could not fetch catalog page data");
+    toast.error("Courses not found for this category");
   }
   toast.dismiss(toastId);
   return result;

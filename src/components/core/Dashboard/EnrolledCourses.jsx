@@ -52,6 +52,7 @@ function EnrolledCourses() {
                 enrolledCourses.map((course, index, courses) => (
                   <EnrolledCourseCard
                     key={index}
+                    myKey={index}
                     course={course}
                     courses={courses}
                   />

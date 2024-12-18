@@ -2,8 +2,10 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function EnrolledCourseCard({ key, course, courses }) {
+function EnrolledCourseCard({ myKey: key, course, courses }) {
   const navigate = useNavigate();
+
+  console.log("course -> ", course);
 
   return (
     <div
@@ -33,7 +35,9 @@ function EnrolledCourseCard({ key, course, courses }) {
           </p>
         </div>
       </div>
-      <div className="w-1/4 px-2 py-3">{course?.totalDuration}</div>
+      <div className="w-1/4 px-2 py-3 text-richblack-100">
+        {course?.totalDuration || "2h 30min"}
+      </div>
       <div className="flex w-1/5 flex-col gap-2 px-2 py-3">
         <p>Progress: {course?.progressPercentage || 0}%</p>
         <ProgressBar
