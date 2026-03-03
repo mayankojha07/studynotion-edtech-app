@@ -1,70 +1,159 @@
-# Getting Started with Create React App
+![React](https://img.shields.io/badge/Frontend-React-blue)
+![Node](https://img.shields.io/badge/Backend-Node.js-green)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-darkgreen)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 📚 StudyNotion – EdTech Platform (MERN Stack)
 
-## Available Scripts
+🔗 **Live Link:** https://studynotion-edu-mern.netlify.app/
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 About the Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**StudyNotion** is a full-stack **EdTech platform** where:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 👨‍🏫 Independent instructors can draft, create, and publish their courses.
+- 👨‍🎓 Students can explore and enroll in courses by purchasing them.
+- 💳 Secure online payments are handled through Razorpay.
+- 📊 Users get personalized dashboards to manage learning or teaching activities.
 
-### `npm test`
+The platform provides a modern, scalable, and production-ready learning management system built using the MERN stack.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+# 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🌐 Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React.js
+- Redux Toolkit (State Management)
+- React Router DOM
+- Tailwind CSS
+- Axios
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚙️ Backend
 
-### `npm run eject`
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Cloudinary (Media Storage)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 💳 Payment Integration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Razorpay Payment Gateway
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# ✨ Key Features
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Role-based Authentication (Student / Instructor)
+- Course Creation & Management
+- Secure Razorpay Payment Integration
+- JWT-based Protected Routes
+- Dashboard for Students & Instructors
+- Cloudinary Media Upload
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 📸 Screenshots
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🏠 Home Page
 
-### Code Splitting
+![Home Page](./public/home.png)
+![Home Page](./public/home2.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🧑‍💻 Signup Page
 
-### Analyzing the Bundle Size
+![Signup Page](./public/signup.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📊 Dashboard
 
-### Making a Progressive Web App
+![Dashboard](./public/dashboard.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🧩 Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Make sure you have installed:
 
-### Deployment
+- Node.js (v18+ recommended)
+- npm
+- MongoDB (local or MongoDB Atlas)
+- Razorpay account
+- Cloudinary account
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# ⚙️ Setup & Installation Guide
 
-### `npm run build` fails to minify
+Follow these steps to run the project locally.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/mayankojha07/studynotion-edtech-app.git
+cd studynotion-edtech-app
+```
+
+## 2️⃣ Install Dependencies
+
+Install Backend Dependencies
+
+```bash
+cd server
+npm install
+```
+
+Install Frontend Dependencies
+
+```bash
+npm install
+```
+
+## 🔑 Environment Variables Setup
+
+Create a .env file inside the server folder.
+
+📂 server/.env
+
+```bash
+PORT=4000
+MONGODB_URL=your_mongodb_connection_string
+
+JWT_SECRET=your_jwt_secret_key
+
+CLOUD_NAME=your_cloudinary_name
+API_KEY=your_cloudinary_api_key
+API_SECRET=your_cloudinary_api_secret
+
+RAZORPAY_KEY=your_razorpay_key
+RAZORPAY_SECRET=your_razorpay_secret
+
+MAIL_HOST=smtp.gmail.com
+MAIL_USER=your_email
+MAIL_PASS=your_email_password
+
+FRONTEND_URL=http://localhost:3000
+```
+
+## 🖥️ Start Backend & Frontend Server (Concurrently)
+
+```bash
+npm run dev
+```
+
+## 📁 Project Structure
+
+```bash
+studynotion-edtech-app/
+│
+├── client/ # React Frontend
+├── server/ # Node/Express Backend
+├── screenshots/ # Project Images
+└── README.md
+```
+
+# 👨‍💻 Author
+
+- **Mayank Ojha**
+- **GitHub:** https://github.com/mayankojha07
